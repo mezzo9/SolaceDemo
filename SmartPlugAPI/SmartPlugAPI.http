@@ -1,0 +1,6 @@
+@SmartPlugAPI_HostAddress = http://localhost:5091
+
+GET {{SmartPlugAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

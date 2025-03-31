@@ -1,0 +1,30 @@
+﻿services:
+  thermostatapi:
+    image: thermostatapi
+    build:
+      context: .
+      dockerfile: ThermostatAPI/Dockerfile
+
+  lightapi:
+    image: lightapi
+    build:
+      context: .
+      dockerfile: LightAPI/Dockerfile
+
+  smartplugapi:
+    image: smartplugapi
+    build:
+      context: .
+      dockerfile: SmartPlugAPI/Dockerfile
+
+  webapplication1:
+    image: webapplication1
+    build:
+      context: .
+      dockerfile: WebApplication1/Dockerfile
+
+  smartplugapi-1:
+    image: smartplugapi-1
+    build:
+      context: .
+      dockerfile: SmartPlugAPI/Dockerfile
