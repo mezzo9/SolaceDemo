@@ -6,5 +6,8 @@ namespace SmartPlugAPI.APIs;
 [Route("[controller]")]
 public class SmartPlugController  : ControllerBase
 {
-    
+    public IActionResult Get()
+    {
+        return Ok(new { result = AllDevices.SmartPlugs });
+    }
 }

@@ -1,5 +1,5 @@
 ﻿using Quartz;
-using Solace.Shared;
+using IoTShared;
 
 namespace SmartPlugAPI;
 

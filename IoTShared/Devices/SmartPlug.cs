@@ -1,10 +1,13 @@
-﻿namespace IoTShared;
+﻿namespace IoTShared.Devices;
 
 public class SmartPlug : DeviceBase, IDevice
 {
+    // I'm intentional about this naming convention.
+    // _ means it is Private
     private double _CurrentAmp { get; set; }
-    public required Location Location { get; set; }
     public const string Domain = Domains.Plug;
+    public int DeviceId { get; set; }
+    public required Room Room { get; set; }
     public bool IsActive { get; set; }
     public ushort MaxAmp { get; set; }
 
@@ -18,4 +21,5 @@ public class SmartPlug : DeviceBase, IDevice
             NotifyPropertyChanged(nameof(CurrentAmp));
         }
     }
+
 }

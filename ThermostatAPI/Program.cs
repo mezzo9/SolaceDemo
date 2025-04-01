@@ -1,5 +1,5 @@
 using Quartz;
-using SmartPlugAPI;
+using ThermostatAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,25 +8,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddQuartz(config =>
 {
-    var jobKey = new JobKey(nameof(ChangeLoad));
-
+    var jobKey = new JobKey(nameof(ChangeTemperature));
+    var hotJob = new JobKey(nameof(TooHot));
     config
-        .AddJob<ChangeLoad>(jobKey)
+        .AddJob<ChangeTemperature>(jobKey)
         .AddTrigger(
             trigger => trigger.ForJob(jobKey)
                 .StartNow()
-                .WithSimpleSchedule(schedule => schedule.WithIntervalInSeconds(5)
-                        .RepeatForever()));
-
+                .WithSimpleSchedule(schedule => schedule.WithIntervalInSeconds(10)
+                    .RepeatForever()))
+        .AddJob<TooHot>(hotJob)
+        .AddTrigger( trigger => trigger.ForJob(hotJob)
+            .WithSimpleSchedule( s=> s.WithIntervalInSeconds(30)
+                .WithRepeatCount(6)));
 });
 
 builder.Services.AddQuartzHostedService(config =>
 {
     config.WaitForJobsToComplete = true;
 });
+
 builder.Services.AddControllers();
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -35,7 +38,6 @@ if (app.Environment.IsDevelopment())
 }
 app.MapControllers();
 app.UseHttpsRedirection();
-
 app.Init();
 app.Run();
 

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace IoTShared;
+namespace IoTShared.Devices;
 
 // hub/client/location/room/component/status
 

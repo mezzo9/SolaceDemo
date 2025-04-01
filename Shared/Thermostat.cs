@@ -1,4 +1,4 @@
-﻿namespace Solace.Shared;
+﻿namespace IoTShared;
 
 public class Thermostat : DeviceBase
 {

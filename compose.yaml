@@ -28,3 +28,9 @@
     build:
       context: .
       dockerfile: SmartPlugAPI/Dockerfile
+
+  thermostatapi-1:
+    image: thermostatapi-1
+    build:
+      context: .
+      dockerfile: ThermostatAPI/Dockerfile

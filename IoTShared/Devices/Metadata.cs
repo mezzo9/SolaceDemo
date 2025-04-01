@@ -1,4 +1,4 @@
-﻿namespace IoTShared;
+﻿namespace IoTShared.Devices;
 
 public class Metadata
 {

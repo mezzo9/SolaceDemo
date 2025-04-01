@@ -1,0 +1,6 @@
+@ThermostatAPI_HostAddress = http://localhost:5097
+
+GET {{ThermostatAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
