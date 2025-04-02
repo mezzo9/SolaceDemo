@@ -10,4 +10,10 @@
       <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.27.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="DigiCertGlobalRootCA.crt.pem">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

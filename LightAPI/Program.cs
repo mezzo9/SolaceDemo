@@ -1,5 +1,5 @@
+using LightAPI;
 using Quartz;
-using ThermostatAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,36 +8,30 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddQuartz(config =>
 {
-    var jobKey = new JobKey(nameof(ChangeTemperature));
-    var hotJob = new JobKey(nameof(TooHot));
+    var jobKey = new JobKey(nameof(LightFlicker));
     config
-        .AddJob<ChangeTemperature>(jobKey)
+        .AddJob<LightFlicker>(jobKey)
         .AddTrigger(
             trigger => trigger.ForJob(jobKey)
                 .StartNow()
-                .WithSimpleSchedule(schedule => schedule.WithIntervalInSeconds(10)
-                    .RepeatForever()))
-        .AddJob<TooHot>(hotJob)
-        .AddTrigger( trigger => trigger.ForJob(hotJob)
-            .WithSimpleSchedule( s=> s.WithIntervalInSeconds(30)
-                .WithRepeatCount(6)));
+                .WithSimpleSchedule(schedule => schedule.WithIntervalInSeconds(5)
+                    .RepeatForever()));
 });
 
 builder.Services.AddQuartzHostedService(config =>
 {
     config.WaitForJobsToComplete = true;
 });
-
 builder.Services.AddControllers();
 var app = builder.Build();
 app.MapControllers();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-app.MapControllers();
+
 app.UseHttpsRedirection();
 app.Init();
 app.Run();
-

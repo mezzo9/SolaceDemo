@@ -30,7 +30,7 @@ public class AllDevices
             {
                 Brand = Brand.Honeywell
             },
-            IsActive = roomNo % 2 == 0,
+            IsActive = roomNo % 2 == 0, // to have a sample of both active and non-active ones
             IsOnline = true,
             CurrentAmp = currentAmp,
             MaxAmp = 10,

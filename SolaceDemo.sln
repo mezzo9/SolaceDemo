@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThermostatAPI", "Thermostat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolaceService", "SolaceService\SolaceService.csproj", "{7B5CC700-59E2-4A54-966F-1B6CE2EFD59C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightAPI", "LightAPI\LightAPI.csproj", "{C80E94D2-E749-4BDD-9735-3E8ABAE0026D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticIndexer", "ElasticIndexer\ElasticIndexer.csproj", "{48859899-EBF4-4D11-944C-ABA2E6C4658B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,5 +51,13 @@ Global
 		{7B5CC700-59E2-4A54-966F-1B6CE2EFD59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B5CC700-59E2-4A54-966F-1B6CE2EFD59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B5CC700-59E2-4A54-966F-1B6CE2EFD59C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C80E94D2-E749-4BDD-9735-3E8ABAE0026D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C80E94D2-E749-4BDD-9735-3E8ABAE0026D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C80E94D2-E749-4BDD-9735-3E8ABAE0026D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C80E94D2-E749-4BDD-9735-3E8ABAE0026D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48859899-EBF4-4D11-944C-ABA2E6C4658B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48859899-EBF4-4D11-944C-ABA2E6C4658B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48859899-EBF4-4D11-944C-ABA2E6C4658B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48859899-EBF4-4D11-944C-ABA2E6C4658B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -2,14 +2,20 @@
 using System.Globalization;
 using IoTShared;
 using IoTShared.Devices;
+using SolaceService;
 
 namespace ThermostatAPI;
 
 public class Thermostats
 {
-// List of all the SmartPlugs
+    // List of all the Thermostats
     public static readonly List<Thermostat> AllThermostats = new();
     private readonly Room[] _rooms = TestLocations.GetRooms();
+    
+    // This is a very bad idea, besides being bad design, it will cause memory growth
+    // add it to DI as Singleton
+    private readonly MessageService _messageService = new();
+
     public void Initialize()
     {
         var rnd = new Random();
@@ -40,7 +46,8 @@ public class Thermostats
         // TODO: Fire Solace Event for changed thingy
         var thermostat = sender as Thermostat ?? CreateThermostat(0, new Random());
         var topic =
-            $"{thermostat.Room.Floor.Building.Location.Name}/{thermostat.Room.Floor.Building.Name}/{thermostat.Room.Floor.Name}/{thermostat.Room.Name}/thermostat/{thermostat.Metadata.Brand}/temperature_changed";
+            $"device/thermostat/{thermostat.Room.Floor.Building.Location.Name}/{thermostat.Room.Floor.Building.Name}/{thermostat.Room.Floor.Name}/{thermostat.Room.Name}/{thermostat.Metadata.Brand}/temperature_changed";
+        _messageService.PublishMessage($"Thermostate temperature changed to: {thermostat.CurrentTempreture}",topic);
         Console.Out.WriteLine($"{topic}: {thermostat.CurrentTempreture}");
     }
 }

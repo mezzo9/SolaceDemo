@@ -5,7 +5,7 @@ namespace ThermostatAPI;
 
 [ApiController]
 [Route("[controller]")]
-public class Thermostat : ControllerBase
+public class ThermostatController : ControllerBase
 {
     // GET
     public IActionResult Get()
