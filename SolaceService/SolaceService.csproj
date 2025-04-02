@@ -16,4 +16,8 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\IoTShared\IoTShared.csproj" />
+    </ItemGroup>
+
 </Project>

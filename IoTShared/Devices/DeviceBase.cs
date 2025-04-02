@@ -10,6 +10,7 @@ public class DeviceBase : INotifyPropertyChanged
 {
     public required Metadata Metadata { get; set; }
     private bool _IsOnline { get; set; }
+    public DateTime ChangedAt { get; set; }
     public bool IsOnline
     {
         get => _IsOnline;

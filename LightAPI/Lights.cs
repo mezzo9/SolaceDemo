@@ -40,19 +40,21 @@ public class Lights
                 IsOnline = true,
                 IsOn = roomNo % 2 == 0
             };
-            light.PropertyChanged += TemperatureChanged;
+            light.PropertyChanged += LightChanges;
             list.Add(light);
         }
 
         return list;
     }
 
-    private void TemperatureChanged(object? sender, PropertyChangedEventArgs e)
+    private void LightChanges(object? sender, PropertyChangedEventArgs e)
     {
-        // TODO: Fire Solace Event for changed thingy
+        // Fire Solace Event for changed thingy
         var bulb = sender as Bulb ?? ZeroLight;
         var topic =
             $"device/light/{bulb.Room.Floor.Building.Location.Name}/{bulb.Room.Floor.Building.Name}/{bulb.Room.Floor.Name}/{bulb.Room.Name}/{bulb.Metadata.Brand}/state_changed";
+        //var sEvent = new SolaceEvent<Bulb> { EventDateTime = DateTime.Now.ToLocalTime(), Device = bulb};
+        bulb.ChangedAt = DateTime.UtcNow;
         _messageService.PublishMessage(JsonConvert.SerializeObject(bulb),topic);
         Console.Out.WriteLine($"{topic}: {bulb.IsOn}");
     }

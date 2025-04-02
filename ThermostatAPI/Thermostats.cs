@@ -47,6 +47,7 @@ public class Thermostats
         var thermostat = sender as Thermostat ?? CreateThermostat(0, new Random());
         var topic =
             $"device/thermostat/{thermostat.Room.Floor.Building.Location.Name}/{thermostat.Room.Floor.Building.Name}/{thermostat.Room.Floor.Name}/{thermostat.Room.Name}/{thermostat.Metadata.Brand}/temperature_changed";
+        thermostat.ChangedAt = DateTime.UtcNow;
         _messageService.PublishMessage($"Thermostate temperature changed to: {thermostat.CurrentTempreture}",topic);
         Console.Out.WriteLine($"{topic}: {thermostat.CurrentTempreture}");
     }

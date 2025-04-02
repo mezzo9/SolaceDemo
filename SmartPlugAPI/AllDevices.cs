@@ -2,6 +2,8 @@
 using System.Globalization;
 using IoTShared;
 using IoTShared.Devices;
+using Newtonsoft.Json;
+using SolaceService;
 
 namespace SmartPlugAPI;
 
@@ -10,6 +12,9 @@ public class AllDevices
     // List of all the SmartPlugs
     public static readonly List<SmartPlug> SmartPlugs = new();
     private readonly Room[] _rooms = TestLocations.GetRooms();
+    // This is a very bad idea, besides being bad design, it will cause memory growth
+    // add it to DI as Singleton
+    private readonly MessageService _messageService = new();
     public void Initialize()
     {
         var rnd = new Random();
@@ -46,7 +51,9 @@ public class AllDevices
         // Location/Building/Floor/Room/Sensor/State
         var plug = sender as SmartPlug ?? CreateSmartPlug(0, new Random());
         var topic =
-            $"{plug.Room.Floor.Building.Location.Name}/{plug.Room.Floor.Building.Name}/{plug.Room.Floor.Name}/{plug.Room.Name}/smartplug/{plug.Metadata.Brand}/current_changed";
+            $"device/smartplug/{plug.Room.Floor.Building.Location.Name}/{plug.Room.Floor.Building.Name}/{plug.Room.Floor.Name}/{plug.Room.Name}/{plug.Metadata.Brand}/current_changed";
+        plug.ChangedAt = DateTime.UtcNow;
+        _messageService.PublishMessage(JsonConvert.SerializeObject(plug),topic);
         Console.Out.WriteLine($"{topic}: {plug.CurrentAmp}");
     }
 }
