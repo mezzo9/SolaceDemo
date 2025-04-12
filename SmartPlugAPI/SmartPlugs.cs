@@ -27,7 +27,9 @@ public class SmartPlugs
         var roomNo = random.Next(0, 20);
         var plug = new SmartPlug
         {
-            DeviceId = int.Parse(currentAmp.ToString(CultureInfo.InvariantCulture)),
+            // for convenience, Setting the deviceId to the string value of the initial amperage
+            // adding the room number to make deviceId unique
+            DeviceId = int.Parse(currentAmp.ToString(CultureInfo.InvariantCulture))+roomNo,
             Room = Rooms[roomNo],
             Domain = Domains.Plug,
             Metadata = new Metadata

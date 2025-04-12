@@ -3,9 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace IoTShared.Devices;
 
-// hub/client/location/room/component/status
 
-// we can capture the old value if needed, by customizing the event in case we want to do Audit
+
+// we can capture the old value if needed, by customizing the event in case we want to do that type of Audit
 public class DeviceBase : INotifyPropertyChanged
 {
     public required Metadata Metadata { get; set; }
