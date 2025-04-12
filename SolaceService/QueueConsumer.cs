@@ -99,11 +99,15 @@ public class QueueConsumer
     private void HandleMessageEvent(object? source, MessageEventArgs args)
     {
         // Received a message
-        Console.WriteLine("Received message.");
+        
+        // uncomment for debugging
+        // Console.WriteLine("Received message.");
         using IMessage message = args.Message;
         // Expecting the message content as a binary attachment
         var content = Encoding.ASCII.GetString(message.BinaryAttachment);
-        Console.WriteLine("Message content: {0}", content);
+        
+        // uncomment for debugging
+        // Console.WriteLine("Message content: {0}", content);
         
         // This way we can Open for extension and close for modification/
         // Calling API can provide different ways of consuming events and has control over it 

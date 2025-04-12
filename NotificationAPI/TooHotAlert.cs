@@ -9,7 +9,7 @@ namespace NotificationAPI;
 /// </summary>
 public class TooHotAlert: IConsumer
 {
-    public string Queue { get; set; } = Queues.Thermostats;
+    public string Queue { get; set; } = Queues.Alerts;
 
     public void Consume(string content)
     {

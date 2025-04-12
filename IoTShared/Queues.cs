@@ -6,4 +6,5 @@ public static class Queues
     public const string SmartPlugs = "Q/smartplugs";
     public const string Lights = "Q/lights";
     public const string DeviceBackup = "Q/backup";
+    public const string Alerts = "Q/alert";
 }
