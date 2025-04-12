@@ -26,6 +26,7 @@ public class MessageService
             Host = "tcps://mr-connection-5k08bz06mdg.messaging.solace.cloud:55443",
             VPNName = "solacedemo",
             UserName = "solace-cloud-client",
+            // in production code, make sure password is not hard coded. use vault or KMS, or local encryption to retrieve the password 
             Password = "kvbjfldto53tu00mjdm898agei",
             ReconnectRetries = 2,
             SSLValidateCertificate = false,

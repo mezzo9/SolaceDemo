@@ -17,6 +17,7 @@ public class KafkaProducer
 
     public void Archive(string content)
     {
+        // Archives in kafka under topic: device_archive
         var result = _producer.ProduceAsync(
             "device_archive", new Message<Null, string> { Value = content }).GetAwaiter().GetResult();
     }

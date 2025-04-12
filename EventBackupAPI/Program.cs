@@ -19,5 +19,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Subscribes to the Backup queue and archives all the events in Kafka
 new QueueConsumer().Consume(new BakcupDeviceEvents());
 app.Run();

@@ -49,6 +49,12 @@ public class QueueConsumer
         return session;
     }
 
+    /// <summary>
+    /// This will consume events from a Queue.
+    /// This is using the Open/Close pattern for S.O.L.I.D.
+    /// Queue name and how the event is consumed will be provided by the caller
+    /// </summary>
+    /// <param name="consumer">instance of ICustomer</param>
     public void Consume(IConsumer consumer)
     {
         // Provision the queue
