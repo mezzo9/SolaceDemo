@@ -7,20 +7,18 @@ using SolaceService;
 
 namespace SmartPlugAPI;
 
-public class AllDevices
+public class SmartPlugs
 {
     // List of all the SmartPlugs
-    public static readonly List<SmartPlug> SmartPlugs = new();
-    private readonly Room[] _rooms = TestLocations.GetRooms();
-    // This is a very bad idea, besides being bad design, it will cause memory growth
-    // add it to DI as Singleton
+    public static readonly List<SmartPlug> AllSmartPlugs = [];
+    public readonly Room[] Rooms = TestLocations.GetRooms();
     private readonly MessageService _messageService = new();
+
     public void Initialize()
     {
         var rnd = new Random();
-        TestLocations.GetRooms();
         foreach (var n in Enumerable.Range(1,20))
-            SmartPlugs.Add(CreateSmartPlug(n+5, rnd));
+            AllSmartPlugs.Add(CreateSmartPlug(n+5, rnd));
     }
 
     private SmartPlug CreateSmartPlug(double currentAmp, Random random)
@@ -30,10 +28,12 @@ public class AllDevices
         var plug = new SmartPlug
         {
             DeviceId = int.Parse(currentAmp.ToString(CultureInfo.InvariantCulture)),
-            Room = _rooms[roomNo], 
+            Room = Rooms[roomNo],
+            Domain = Domains.Plug,
             Metadata = new Metadata
             {
-                Brand = Brand.Honeywell
+                Brand = Brand.Honeywell,
+                ModelNo = "HW-213"
             },
             IsActive = roomNo % 2 == 0, // to have a sample of both active and non-active ones
             IsOnline = true,
@@ -46,12 +46,14 @@ public class AllDevices
 
     private void CurrentAmpChanged(object? sender, PropertyChangedEventArgs e)
     {
-        // TODO: Fire Solace Event for changed thingy
-        // hub/client/location/room/component/status
-        // Location/Building/Floor/Room/Sensor/State
+
+        // /client/region/hotel/location/building/floor/room/version/event_type/domain/modelno/[State, changed]
+
         var plug = sender as SmartPlug ?? CreateSmartPlug(0, new Random());
         var topic =
-            $"device/smartplug/{plug.Room.Floor.Building.Location.Name}/{plug.Room.Floor.Building.Name}/{plug.Room.Floor.Name}/{plug.Room.Name}/{plug.Metadata.Brand}/current_changed";
+            $"cubanholding/uswest/{plug.Room.Floor.Building.Location.Name}/{plug.Room.Floor.Building.Location.Name}/" +
+            $"{plug.Room.Floor.Building.Name}/{plug.Room.Floor.Name}/{plug.Room.Name}" +
+            $"/v1/iot/smartplug/{plug.Metadata.ModelNo}/current_changed";
         plug.ChangedAt = DateTime.UtcNow;
         _messageService.PublishMessage(JsonConvert.SerializeObject(plug),topic);
         Console.Out.WriteLine($"{topic}: {plug.CurrentAmp}");

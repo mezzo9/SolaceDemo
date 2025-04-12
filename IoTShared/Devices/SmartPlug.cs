@@ -5,7 +5,7 @@ public class SmartPlug : DeviceBase, IDevice
     // I'm intentional about this naming convention.
     // _ means it is Private
     private double _CurrentAmp { get; set; }
-    public const string Domain = Domains.Plug;
+    public string Domain = Domains.Plug;
     public int DeviceId { get; set; }
     public required Room Room { get; set; }
     public bool IsActive { get; set; }

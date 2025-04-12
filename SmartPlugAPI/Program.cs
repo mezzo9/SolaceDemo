@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Using Quartz to simulate readings from smart plugs Every 5 seconds 
 builder.Services.AddQuartz(config =>
 {
     var jobKey = new JobKey(nameof(ChangeLoad));
@@ -36,6 +38,7 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 app.UseHttpsRedirection();
 
+// Initializing all simulated Smart plugs 
 app.Init();
 app.Run();
 

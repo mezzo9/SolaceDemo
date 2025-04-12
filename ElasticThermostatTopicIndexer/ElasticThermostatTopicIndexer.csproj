@@ -5,15 +5,13 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>ElasticThermostatIndexer</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.17.3" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Quartz" Version="3.14.0" />
-        <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.14.0" />
-        <PackageReference Include="Quartz.Extensions.Hosting" Version="3.14.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -25,6 +23,10 @@
     <ItemGroup>
       <ProjectReference Include="..\IoTShared\IoTShared.csproj" />
       <ProjectReference Include="..\SolaceService\SolaceService.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controllers\" />
     </ItemGroup>
 
 </Project>

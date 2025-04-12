@@ -4,7 +4,7 @@ public static class Helpers
 {
     public static IApplicationBuilder Init(this IApplicationBuilder app)
     {
-        new AllDevices().Initialize();
+        new SmartPlugs().Initialize();
         return app;
     }
 }

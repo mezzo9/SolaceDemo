@@ -16,6 +16,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ElasticIndexer\ElasticIndexer.csproj" />
+      <ProjectReference Include="..\ElasticThermostatTopicIndexer\ElasticThermostatTopicIndexer.csproj" />
+      <ProjectReference Include="..\EventBackupAPI\EventBackupAPI.csproj" />
+      <ProjectReference Include="..\LightAPI\LightAPI.csproj" />
+      <ProjectReference Include="..\NotificationAPI\NotificationAPI.csproj" />
       <ProjectReference Include="..\SmartPlugAPI\SmartPlugAPI.csproj" />
       <ProjectReference Include="..\ThermostatAPI\ThermostatAPI.csproj" />
     </ItemGroup>

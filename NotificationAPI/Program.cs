@@ -1,11 +1,5 @@
-using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch;
-using Elastic.Transport;
-using ElasticIndexer;
-using IoTShared;
-using IoTShared.Devices;
-using Newtonsoft.Json;
-using SolaceService;using SolaceSystems.Solclient.Messaging;
+using NotificationAPI;
+using SolaceService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +17,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-new QueueConsumer().Consume(new LighConsumer());
-new QueueConsumer().Consume(new PlugConsumer());
+
+new QueueConsumer().Consume(new TooHotAlert());
 
 app.Run();
+

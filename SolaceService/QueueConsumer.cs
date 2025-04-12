@@ -98,8 +98,10 @@ public class QueueConsumer
         // Expecting the message content as a binary attachment
         var content = Encoding.ASCII.GetString(message.BinaryAttachment);
         Console.WriteLine("Message content: {0}", content);
-            // TODO: Figure out the consumer
-            _consumer?.Consume(content);
+        
+        // This way we can Open for extension and close for modification/
+        // Calling API can provide different ways of consuming events and has control over it 
+        _consumer?.Consume(content);
         // ACK the message
         _flow?.Ack(message.ADMessageId);
         // finish the program

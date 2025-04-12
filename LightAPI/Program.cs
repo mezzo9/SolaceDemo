@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Using Quartz to simulate flipping the switch every 5 seconds
 builder.Services.AddQuartz(config =>
 {
     var jobKey = new JobKey(nameof(LightFlicker));
@@ -33,5 +35,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Initializing all the lights
 app.Init();
 app.Run();

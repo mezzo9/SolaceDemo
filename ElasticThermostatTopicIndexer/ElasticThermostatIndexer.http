@@ -1,0 +1,6 @@
+@ElasticThermostatIndexer_HostAddress = http://localhost:5249
+
+GET {{ElasticThermostatIndexer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,11 +1,14 @@
 ﻿using Quartz;
 
 namespace LightAPI;
-
+/// <summary>
+/// This will simulate a light bulb turning on or off
+/// </summary>
 public class LightFlicker: IJob
 {
     public async Task Execute(IJobExecutionContext context)
     {
+        // picks a random light and flips the switch on that light
         var random = new Random();
         var lightNo = random.Next(0, Lights.AllBulbs.Count);
         var light = Lights.AllBulbs.ToArray()[lightNo];

@@ -8,6 +8,6 @@ public class SmartPlugController  : ControllerBase
 {
     public IActionResult Get()
     {
-        return Ok(new { result = AllDevices.SmartPlugs });
+        return Ok(new { result = SmartPlugs.AllSmartPlugs });
     }
 }

@@ -3,9 +3,12 @@ using ThermostatAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
+
+// Using Quartz to simulate Temperature readings and specific intervals
+// Every 10 seconds a normal temperature reading will happen
+// Every 30 seconds a random Thermostat will read a temperature between 90 to 110
 builder.Services.AddQuartz(config =>
 {
     var jobKey = new JobKey(nameof(ChangeTemperature));
@@ -38,6 +41,8 @@ if (app.Environment.IsDevelopment())
 }
 app.MapControllers();
 app.UseHttpsRedirection();
+
+// Initializing all simulated Thermostats 
 app.Init();
 app.Run();
 
