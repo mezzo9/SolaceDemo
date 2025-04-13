@@ -11,7 +11,7 @@ public class QueueConsumer
     private IQueue? _queue;
     private IFlow? _flow;
     private readonly EventWaitHandle _waitEventWaitHandle = new AutoResetEvent(false);
-    private IConsumer? _consumer = null;
+    private IQueueConsumer? _consumer = null;
     public QueueConsumer()
     {
         _session = GetSession();
@@ -44,8 +44,12 @@ public class QueueConsumer
         if (returnCode == ReturnCode.SOLCLIENT_OK)
         {
             Console.Out.WriteLine("Connected to Solace Cloud"); // connected to the Solace message router
-            
         }
+        else
+        {
+            Console.Out.WriteLine($"Error connecting to Solace!: {returnCode}");
+        }
+
         return session;
     }
 
@@ -55,7 +59,7 @@ public class QueueConsumer
     /// Queue name and how the event is consumed will be provided by the caller
     /// </summary>
     /// <param name="consumer">instance of ICustomer</param>
-    public void Consume(IConsumer consumer)
+    public void Consume(IQueueConsumer consumer)
     {
         // Provision the queue
         string queueName = consumer.Queue;

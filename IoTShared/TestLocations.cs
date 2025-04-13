@@ -3,6 +3,7 @@
 public static class TestLocations
 {
     private static Room[]? _rooms;
+
     public static readonly Location SFHilton = new Location
     {
         LocationId = 1,
@@ -23,9 +24,39 @@ public static class TestLocations
         Address = "1829 Sacramento St, New York, NY 54123",
         Name = "West Sea Point"
     };
-    
+
     public static readonly List<Floor> Floors =
     [
+        HiltonMain,
+        MarriottAztec,
+        WestpointConventionCenter,
+        WestpointLobby
+    ];
+
+
+
+    public static Room[] GetRooms()
+    {
+        int howMany = 20;
+        if (_rooms == null)
+            _rooms = Enumerable.Range(start: 0, count: howMany).Select(_ => GenerateRoom(new Random())).ToArray();
+        return _rooms;
+    }
+
+    private static Room GenerateRoom(Random random)
+    {
+        var roomNumber = random.Next(1, 10);
+        return new Room
+        {
+            Floor = Floors.FirstOrDefault(f => f.FloorId == Math.Abs(roomNumber / 3)) ?? MarriottAztec,
+            Name = $"{roomNumber}",
+            // generating unique id for rooms, in production you can use GUID or a combination of prefix with hotelId, or buildingId
+            RoomId = int.Parse($"{Math.Abs(roomNumber*random.Next() / 3)}"),
+            NumberOfBeds = random.Next(1, 3)
+        };
+    }
+
+    public static Floor HiltonMain =>
         new Floor
         {
             Building = new Building
@@ -37,8 +68,9 @@ public static class TestLocations
             Name = "First Floor",
             FloorId = 1,
             FloorNumber = 1
-        },
+        };
 
+    public static Floor MarriottAztec =>
         new Floor
         {
             Building = new Building
@@ -47,11 +79,12 @@ public static class TestLocations
                 Name = "Aztec",
                 BuildingId = 2
             },
-            Name = "Second Floor",
+            Name = "First Floor",
             FloorId = 2,
-            FloorNumber = 2
-        },
+            FloorNumber = 1
+        };
 
+    public static Floor WestpointConventionCenter =>
         new Floor
         {
             Building = new Building
@@ -60,37 +93,13 @@ public static class TestLocations
                 Name = "Convention Center",
                 BuildingId = 3
             },
-            Name = "Third Floor",
+            Name = "Second Floor",
             FloorId = 3,
-            FloorNumber = 3
-        }
-    ];
-    
-
-    
-    public static Room[] GetRooms()
-    {
-        int howMany = 20;
-        if (_rooms == null)
-            _rooms = Enumerable.Range(start:0, count:howMany).Select(_ => GenerateRoom(new Random())).ToArray();
-        return _rooms;
-    }
-
-    private static Room GenerateRoom(Random random)
-    {
-        var roomNumber = random.Next(1, 10);
-        return new Room
-        {
-            Floor = Floors.FirstOrDefault(f => f.FloorNumber == Math.Abs(roomNumber / 3)) ?? Lobby(),
-            Name = $"{roomNumber}",
-            RoomId = int.Parse($"{Math.Abs(roomNumber / 3)}{roomNumber}"),
-            NumberOfBeds = random.Next(1, 3)
+            FloorNumber = 2
         };
-    }
 
-    private static Floor Lobby()
-    {
-        return new Floor
+    public static Floor WestpointLobby =>
+        new Floor
         {
             Building = new Building
             {
@@ -102,5 +111,4 @@ public static class TestLocations
             FloorId = 4,
             FloorNumber = 1
         };
-    }
 }

@@ -2,7 +2,7 @@
 
 namespace EventBackupAPI;
 
-public class BakcupDeviceEvents : IConsumer
+public class BakcupDeviceEvents : IQueueConsumer
 {
     private readonly KafkaProducer _archiver = new();
 

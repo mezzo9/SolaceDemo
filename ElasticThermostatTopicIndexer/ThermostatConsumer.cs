@@ -7,10 +7,10 @@ using Newtonsoft.Json;
 
 namespace ElasticThermostatIndexer;
 
-public class ThermostatConsumer : IConsumer
+public class ThermostatConsumer : ITopicConsumer
 {
     private readonly ElasticsearchClient _client;
-    public string Queue { get; set; } = Queues.Thermostats;
+    public string Topic { get; set; } = Topics.Thermostat;
 
     public ThermostatConsumer()
     {
@@ -21,6 +21,7 @@ public class ThermostatConsumer : IConsumer
     
     public void Consume(string content)
     {
+        Console.Out.WriteLine($"Thermostat reading: {content}");
         var thermostat = JsonConvert.DeserializeObject<Thermostat>(content);
         _client.IndexAsync(thermostat, index: "iot").GetAwaiter().GetResult();
     }

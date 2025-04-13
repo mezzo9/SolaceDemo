@@ -1,6 +1,10 @@
 ﻿namespace EventBackupAPI;
 using Confluent.Kafka;
 
+/// <summary>
+/// Produces events for Kafka broker
+/// basically reads the events from solace and republishes them to kafka
+/// </summary>
 public class KafkaProducer
 {
     private readonly IProducer<Null, string> _producer;

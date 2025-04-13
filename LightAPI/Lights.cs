@@ -51,7 +51,7 @@ public class Lights
         var topic =
             $"cubanholding/uswest/{bulb.Room.Floor.Building.Location.Name}/{bulb.Room.Floor.Building.Location.Name}/" +
             $"{bulb.Room.Floor.Building.Name}/{bulb.Room.Floor.Name}/{bulb.Room.Name}" +
-            $"/v1/iot/light/{bulb.Metadata.ModelNo}/temperature_changed";
+            $"/v1/iot/light/{bulb.Metadata.ModelNo}/state_changed";
         bulb.ChangedAt = DateTime.UtcNow;
         _messageService.PublishMessage(JsonConvert.SerializeObject(bulb),topic);
         Console.Out.WriteLine($"{topic}: {bulb.IsOn}");

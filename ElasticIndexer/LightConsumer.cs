@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace ElasticIndexer;
 
-public class LighConsumer : IConsumer
+public class LighConsumer : IQueueConsumer
 {
     private readonly ElasticsearchClient _client;
     public string Queue { get; set; } = Queues.Lights;

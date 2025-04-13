@@ -2,7 +2,7 @@
 
 namespace IoTShared;
 
-public interface IConsumer
+public interface IQueueConsumer
 {
     public string Queue { get; set; }
     void Consume(string content);

@@ -7,7 +7,7 @@ namespace NotificationAPI;
 /// <summary>
 /// This consume events from Thermostats queue, and if temperature is above 90 will send a text message
 /// </summary>
-public class TooHotAlert: IConsumer
+public class TooHotAlert: IQueueConsumer
 {
     public string Queue { get; set; } = Queues.Alerts;
 

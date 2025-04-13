@@ -22,5 +22,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-new QueueConsumer().Consume(new ThermostatConsumer());
+
+// Instead of consuming from a Queue, this one consumes from a topic
+new TopicConsumer().Consume(new ThermostatConsumer());
 app.Run();
