@@ -25,7 +25,7 @@ All of the code is written in C#.
 For the ease of wiring I've used Aspire which you can just run one project and it will run all the required projects and gives you a good UI to see all the logs on the web.
 
 What you need:
-- .NET framework with Aspire installed
+- .NET framework 9 installed
 - A Solace broker, code is using Cloud 
 - ELK stack, I've used the docker version locally
 - Kafka, I used docker version provided by Confluent which gives you a good web UI
